@@ -1,0 +1,30 @@
+# leetcode #1122
+# given 2 arrays
+# elements in arr2 are in arr1
+# ex: testArr1 = [2,3,1,3,2,4,6,9,2,19,23,7]
+#     testArr2 = [2,1,4,3,9,6]
+# output: [2,2,2,1,4,3,3,9,6,7,19,23]
+
+def order_arr(arr1, arr2):
+    output = []
+    dict = {}
+    for num in arr1:
+        if dict[num]:
+            dict[num] += 1
+        else:
+            dict[num] = 1
+    for num in arr2:
+        for _ in range(dict[num]):
+            output.append(num)
+        dict[num] = 0
+    unsorted = []
+    for key, value in enumerate(dict):
+        if value != 0:
+            for _ in range(value):
+                unsorted.append(key)
+    unsorted.sort()
+    for num in unsorted:
+        output.append(num)
+    return output
+
+order_arr([2,3,1,3,2,4,6,9,2,19,23,7], [2,1,4,3,9,6])
